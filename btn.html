@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your PHP Bootstrap Template</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+        .search-results {
+            position: absolute;
+            width: 100%;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+
+        .search-item {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .search-item:hover {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Your Logo</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+
+                <!-- Search Bar -->
+                <form class="d-flex ms-auto position-relative">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                        id="searchInput">
+                    <div class="search-results" id="searchResults"></div>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <h1>Welcome to Your PHP Bootstrap Template</h1>
+        <p>This is a simple template using Bootstrap and PHP. Customize it as per your project requirements.</p>
+
+        <!-- Bootstrap Card -->
+        <div class="card mt-4" style="width: 18rem;">
+            <img src="https://via.placeholder.com/150" class="card-img-top" alt="Card Image">
+            <div class="card-body">
+                <h5 class="card-title">Card Title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+
+        <!-- Bootstrap Form -->
+        <form class="mt-4">
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="exampleFormControlInput1"
+                    placeholder="name@example.com">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js (Optional, for Bootstrap's JavaScript components) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+
+        // Simulated data for search results
+        const searchData = [
+            'Home Page',
+            'About Us',
+            'Contact Information',
+            'Bootstrap Template',
+            'PHP Integration',
+            'Search Bar',
+        ];
+
+        searchInput.addEventListener('input', function () {
+            const inputValue = this.value.toLowerCase();
+            const filteredResults = searchData.filter(item => item.toLowerCase().includes(inputValue));
+
+            // Display the filtered results
+            displaySearchResults(filteredResults);
+        });
+
+        function displaySearchResults(results) {
+            // Clear previous results
+            searchResults.innerHTML = '';
+
+            if (results.length > 0) {
+                results.forEach(result => {
+                    const resultItem = document.createElement('div');
+                    resultItem.classList.add('search-item');
+                    resultItem.textContent = result;
+
+                    // Handle click on the result item
+                    resultItem.addEventListener('click', function () {
+                        searchInput.value = result;
+                        searchResults.innerHTML = ''; // Clear results after selection
+                    });
+
+                    searchResults.appendChild(resultItem);
+                });
+            } else {
+                const noResultsItem = document.createElement('div');
+                noResultsItem.classList.add('search-item');
+                noResultsItem.textContent = 'No results found';
+                searchResults.appendChild(noResultsItem);
+            }
+        }
+    </script>
+</body>
+
+</html>
